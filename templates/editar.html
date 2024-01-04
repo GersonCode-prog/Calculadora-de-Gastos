@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Transacción</title>
+</head>
+<body>
+    <h1>Editar Transacción</h1>
+    <form action="/editar/{{ index }}" method="post">
+        <label for="concepto">Concepto:</label>
+        <input type="text" id="concepto" name="concepto" value="{{ transaccion.concepto }}" required>
+
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" name="monto" value="{{ transaccion.monto }}" required>
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" value="{{ transaccion.categoria }}" required>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <p><a href="/">Cancelar y Volver</a></p>
+</body>
+</html>

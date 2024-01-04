@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gastos</title>
+</head>
+<body>
+    <h1>Calculadora de Gastos</h1>
+
+    <form action="/agregar" method="post">
+        <label for="concepto">Concepto:</label>
+        <input type="text" id="concepto" name="concepto" required>
+
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" name="monto" required>
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <button type="submit">Agregar Transacción</button>
+    </form>
+
+    <h2>Resumen de Transacciones</h2>
+    <ul>
+        {% for transaccion in transacciones %}
+            <li>
+                {{ transaccion.concepto }} - ${{ transaccion.monto }} ({{ transaccion.categoria }}) - {{ transaccion.fecha.strftime('%Y-%m-%d %H:%M:%S') }}
+                <a href="/editar/{{ loop.index0 }}">Editar</a>
+                <a href="/eliminar/{{ loop.index0 }}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('exportar_csv') }}">Exportar a CSV</a>
+
+    <form action="/importar-csv" method="post" enctype="multipart/form-data">
+        <label for="archivo">Importar CSV:</label>
+        <input type="file" id="archivo" name="archivo" accept=".csv" required>
+        <button type="submit">Importar</button>
+    </form>
+
+    <a href="/estadisticas">Ver Estadísticas</a>
+
+</body>
+</html>
